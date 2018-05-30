@@ -33,6 +33,10 @@ album1 = Album.new({
 album1.save()
 album2.save()
 
+albums_artist = album1.artist()
+
+artists_album = artist1.albums()
+
 albums = Album.all()
 
 binding.pry

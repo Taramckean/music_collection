@@ -30,12 +30,14 @@ def self.all()
   return albums.map {|album| Album.new(album)}
 end
 
-# def self.all()
-#   sql = "SELECT * FROM pizza_orders"
-#   orders = SqlRunner.run(sql)
-#   return orders.map { |order| PizzaOrder.new(order) }
-# end
-
+def artist()
+  sql = "SELECT * FROM artists where id = $1"
+  values = [@artist_id]
+  results = SqlRunner.run(sql, values)
+  artists_data = results[0]
+  artist = Artist.new(artists_data)
+  return artist
+end
 
 
 end
