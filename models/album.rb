@@ -16,25 +16,25 @@ def save()
   sql = "INSERT INTO albums (title, genre, artist_id)
   VALUES ($1, $2, $3) RETURNING id"
   values = [@title, @genre, @artist_id]
-  @id = SqlRunner("save", values)[0]["id"].to_i
+  @id = SqlRunner.run(sql, values)[0]["id"].to_i
 end
 
+def self.delete_all()
+  sql = "DELETE FROM albums"
+  SqlRunner.run(sql)
+end
 
+def self.all()
+  sql = "SELECT * from albums"
+  albums = SqlRunner.run(sql)
+  return albums.map {|album| Album.new(album)}
+end
 
-# def save()
-#   sql = "INSERT INTO pizza_orders
-#   (topping,
-#     quantity,
-#     customer_id
-#     ) VALUES
-#     (
-#       $1, $2, $3
-#     )
-#     RETURNING id"
-#     values = [@topping, @quantity, @customer_id]
-#     @id = SqlRunner("save", values)[0]["id"].to_i
-#   end
-
+# def self.all()
+#   sql = "SELECT * FROM pizza_orders"
+#   orders = SqlRunner.run(sql)
+#   return orders.map { |order| PizzaOrder.new(order) }
+# end
 
 
 
